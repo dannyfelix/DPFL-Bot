@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
@@ -12,12 +10,14 @@ using Victoria.EventArgs;
 
 namespace DPFL.Bot.Services
 {
+    // Service that defines the functionality for audio related commands used within AudioCommands.cs
     public class AudioService
     {
         private readonly LavaNode _lavaNode;
 
         public AudioService(LavaNode lavaNode) => _lavaNode = lavaNode;
 
+        // Method to connect bot to voice channel of the user that calls the command.
         public async Task<Embed> JoinAsync(IGuild guild, IVoiceState voiceState, ITextChannel textChannel)
         {
             if (_lavaNode.HasPlayer(guild))
@@ -41,6 +41,7 @@ namespace DPFL.Bot.Services
             }
         }
         
+        // Method to play music based on the query given by the user.
         public async Task<Embed> PlayAsync(SocketGuildUser user, IGuild guild, string query)
         {
             if (user.VoiceChannel is null)
@@ -82,6 +83,7 @@ namespace DPFL.Bot.Services
             }
         }
 
+        // Method to disconnect the bot from the current voice channel.
         public async Task<Embed> LeaveAsync(IGuild guild)
         {
             try
@@ -102,6 +104,7 @@ namespace DPFL.Bot.Services
             }
         }
 
+        // Method to pause playback of the player.
         public async Task<Embed> PauseAsync(IGuild guild)
         {
             try
@@ -124,6 +127,7 @@ namespace DPFL.Bot.Services
             }
         }
         
+        // Method to resume playback of the player.
         public async Task<Embed> ResumeAsync(IGuild guild)
         {
             try
@@ -143,6 +147,7 @@ namespace DPFL.Bot.Services
             }
         }
 
+        // Method to skip the the current audio that is playing.
         public async Task<Embed> SkipAsync(IGuild guild)
         {
             try
@@ -165,6 +170,7 @@ namespace DPFL.Bot.Services
             }
         }
 
+        // Method that is hooked to the Victoria event that is invoked when a track finishes playing.
         public async Task TrackEnded(TrackEndedEventArgs args)
         {
             if (!args.Reason.ShouldPlayNext()) return;

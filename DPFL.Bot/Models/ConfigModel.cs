@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace DPFL.Bot.Models
+﻿namespace DPFL.Bot.Models
 {
+    // POCO for config data
     public class ConfigModel
     {
         public string Prefix { get; set; }

@@ -7,13 +7,14 @@ using Discord.WebSocket;
 
 namespace DPFL.Bot.Services
 {
+    // Simple logging service that hooks to Discord's socket client and command service log events and writes formatted error information to file.
     public class LoggingService
     {
         private readonly DiscordSocketClient _discord;
         private readonly CommandService _commands;
 
         private string LogDirectory { get; }
-        private string _logFile => Path.Combine(LogDirectory, $"{DateTime.UtcNow.ToString("yyyy-MM-dd")}.txt");
+        private string LogFile => Path.Combine(LogDirectory, $"{DateTime.UtcNow.ToString("yyyy-MM-dd")}.txt");
         
         public LoggingService(DiscordSocketClient discord, CommandService commands)
         {
@@ -33,13 +34,13 @@ namespace DPFL.Bot.Services
                 Directory.CreateDirectory(LogDirectory);
             }
 
-            if (!File.Exists(_logFile))
+            if (!File.Exists(LogFile))
             {
-                File.Create(_logFile).Dispose();
+                File.Create(LogFile).Dispose();
             }
 
             var logText = $"{DateTime.UtcNow.ToString("hh:mm:ss")} [{msg.Severity}] {msg.Source}: {msg.Exception?.ToString() ?? msg.Message}";
-            File.AppendAllText(_logFile, logText + "\n");
+            File.AppendAllText(LogFile, logText + "\n");
 
             return Console.Out.WriteLineAsync(logText);
         }

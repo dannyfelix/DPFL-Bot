@@ -1,14 +1,12 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using DPFL.Bot.Models;
 using Newtonsoft.Json;
 
 namespace DPFL.Bot.Configurations
 {
+    // Class for initialising the Config data
     public static class ConfigData
     {
         private const string ConfigFolder = "configs";
@@ -28,7 +26,7 @@ namespace DPFL.Bot.Configurations
                 File.WriteAllText(ConfigFolder + "/" + ConfigFile, json);
 
                 Console.WriteLine(
-                    $"Created new configuration file in {ConfigFolder}/{ConfigFile} - Please add your API keys before running the bot again.",
+                    $"Created new configuration file in {ConfigFolder}/{ConfigFile} (within the build directory) - Please add your API keys before running the bot again.",
                     ConsoleColor.Red);
 
                 Thread.Sleep(10000);
@@ -41,7 +39,8 @@ namespace DPFL.Bot.Configurations
             }
         }
 
-        private static ConfigModel GenerateConfig() => new ConfigModel
+        // Method for giving config.json default values to be serialised.
+        private static ConfigModel GenerateConfig() => new()
         {
             Prefix = "`",
             Discord = new DiscordConfig()

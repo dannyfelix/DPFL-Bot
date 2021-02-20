@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
@@ -7,6 +6,8 @@ using DPFL.Bot.Services;
 
 namespace DPFL.Bot.Commands
 {
+    
+    // Commands for Audio functionality, all functionality defined in AudioService.cs
     public class AudioCommands : ModuleBase
     {
         public AudioService AudioService { get; set; }

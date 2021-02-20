@@ -33,6 +33,7 @@ namespace DPFL.Bot.Services
             SubscribeLavaLinkEvents();
         }
 
+        // Login method for bot using Discord Token from config.json, then adding command modules 
         public async Task StartAsync()
         {
             var discordToken = ConfigData.Config.Discord.Token;
@@ -48,6 +49,7 @@ namespace DPFL.Bot.Services
             await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _provider);
         }
 
+        // Method for hooking up LavaLink related events
         private void SubscribeLavaLinkEvents()
         {
             _lavaNode.OnTrackEnded += _audioService.TrackEnded;

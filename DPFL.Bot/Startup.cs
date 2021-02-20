@@ -20,7 +20,7 @@ namespace DPFL.Bot
         
         public Startup(string[] args)
         {
-            var unused = ConfigData.Config; // declared to create '/configs' directory - can replace with same directory check if statement
+            var unused = ConfigData.Config; // Declared to create '/configs' directory - can replace with same directory check if statement
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory() + "/configs")
@@ -48,6 +48,7 @@ namespace DPFL.Bot
             await Task.Delay(-1);
         }
 
+        // Adds all the services to the service collection
         private void ConfigureServices(IServiceCollection services)
         {
             var discordClient = new DiscordSocketClient(new DiscordSocketConfig

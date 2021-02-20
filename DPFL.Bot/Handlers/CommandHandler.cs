@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using Discord.Commands;
 using Discord.WebSocket;
 using DPFL.Bot.Configurations;
-using Microsoft.Extensions.Configuration;
 
 namespace DPFL.Bot.Handlers
 {
+    // Class for handling messages for command input, filters out irrelevant messages.
     public class CommandHandler
     {
         private readonly DiscordSocketClient _discord;
@@ -21,14 +21,12 @@ namespace DPFL.Bot.Handlers
             _discord = discord;
             _commands = commands;
             _provider = provider;
-            _discord.MessageReceived += OnMessageReceivedAsync;
+            _discord.MessageReceived += OnMessageReceivedAsync; // Hooks method to MessageReceived event so every message be filtered to see if response is required.
         }
 
         private async Task OnMessageReceivedAsync(SocketMessage s)
         {
-            /* Previous iteration of next line
-            var msg = s as SocketUserMessage;
-            if (msg is null) return;        */
+            // Filters to ignore messages from irrelevant sources
             if (!(s is SocketUserMessage msg)) return;
             if (_discord?.CurrentUser != null && msg.Author.Id == _discord.CurrentUser.Id) return;
             if (msg.Author.IsBot) return;
