@@ -43,7 +43,8 @@ namespace DPFL.Bot.Configurations
         private static ConfigModel GenerateConfig() => new()
         {
             Prefix = "`",
-            Discord = new DiscordConfig()
+            Discord = new DiscordConfig(),
+            LastFm = new LastFmConfig()
         };
     }
 }

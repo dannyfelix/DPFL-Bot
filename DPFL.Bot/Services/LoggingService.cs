@@ -14,6 +14,7 @@ namespace DPFL.Bot.Services
         private readonly CommandService _commands;
 
         private string LogDirectory { get; }
+        
         private string LogFile => Path.Combine(LogDirectory, $"{DateTime.UtcNow.ToString("yyyy-MM-dd")}.txt");
         
         public LoggingService(DiscordSocketClient discord, CommandService commands)
